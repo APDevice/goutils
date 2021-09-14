@@ -5,11 +5,7 @@ import (
 	"bytes"
 )
 
-type _set interface {
-	Contains(T) bool
-	Add(T) bool
-}
-
+// void is a dummy type used in place of map value
 type void struct{}
 
 // set is a datatype that stores unique values
@@ -110,12 +106,3 @@ func (s set[T]) String() string {
 	
 }
 
-// func (s set[T]) Iterator() {
-// 	temp := make([]T, 0, len(s))
-
-// 	for key := range s {
-// 		temp = append(temp, key)
-// 	}
-
-// 	return iterator{temp, 0}
-// }
