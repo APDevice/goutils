@@ -11,11 +11,8 @@ type void struct{}
 // set is a datatype that stores unique values
 type set[T comparable] map[T]void
 
-/* New returns a new set of a given type T
-
-Usage: variable := set.New[type]()
-*/
-
+// New returns a new set of a given type T
+// 	Usage: variable := set.New[type]()
 func New[T comparable]() set[T] {
 	return make(set[T])
 }
@@ -44,14 +41,11 @@ func (s set[T]) IsEmpty() bool {
 	return len(s) == 0
 }
 
-/* AddAll adds all the elements from another set of type T or other compatible container of T
-
-Input:
- - set[T] or []T
-
- Output:
- - (optional) error: if the container passed in is not supported, an error will be returned indicating the incompatibility
-*/
+// AddAll adds all the elements from another set of type T or other compatible container of T
+//  Input:
+//  - set[T] or []T
+//  Output:
+//  - (optional) error: if the container passed in is not supported, an error will be returned indicating the incompatibility
 func (s *set[T]) AddAll(vals interface{}) error {
 	switch vals.(type) {
 		case set[T]:
@@ -85,10 +79,8 @@ func (s *set[T]) Remove(val T) {
 	delete(*s, val)
 }
 
-/* String implements the Stringer interface, allowing set to be printed out with fmt.Print, etc
-
-Sample output: set[1 2 3]
- */
+// String implements the Stringer interface, allowing set to be printed out with fmt.Print, etc
+//  Sample output: set[1 2 3]
 func (s set[T]) String() string {
 	if s.IsEmpty() { return "set[]" }
 	var output bytes.Buffer
