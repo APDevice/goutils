@@ -92,21 +92,17 @@ func (s *set[T]) Remove(val T) {
 Sample output: set[1 2 3]
  */
 func (s set[T]) String() string {
+	if len(s) == 0 { return "set[]" }
+
 	var output bytes.Buffer
 	
 	output.WriteString("set[")
-	
 	for key := range s {
 		output.WriteString(fmt.Sprintf("%v ", key))
 	}
 
-	if len(s) > 1 {
-		output.Truncate(output.Len()-1)
-	}
-	
 	output.WriteString("]")
 	
 	return output.String()
-	
 }
 
