@@ -99,7 +99,11 @@ func (s set[T]) String() string {
 	for key := range s {
 		output.WriteString(fmt.Sprintf("%v ", key))
 	}
-	output.Truncate(output.Len()-1)
+
+	if len(s) > 1 {
+		output.Truncate(output.Len()-1)
+	}
+	
 	output.WriteString("]")
 	
 	return output.String()
