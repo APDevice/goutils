@@ -15,7 +15,7 @@ func (s1 set[T]) Intersection(s2 set[T]) set[T] {
 	newSet := New[T]()
 
 	for key := range s1 {
-		if _, ok := s2[key]; ok {
+		if s2.Contains(key) {
 			newSet.Add(key)
 		}
 	}
@@ -28,7 +28,7 @@ func (s1 set[T]) Difference(s2 set[T]) set[T] {
 	newSet := New[T]()
 
 	for key := range s1 {
-		if _, ok := s2[key]; !ok {
+		if !s2.Contains(key) {
 			newSet.Add(key)
 		}
 	}
@@ -38,16 +38,16 @@ func (s1 set[T]) Difference(s2 set[T]) set[T] {
 
 // SymmetricDifference returns a new with the common values of of sets A and B, where A.SymmetricDifference(B)
 func (s1 set[T]) SymmetricDifference(s2 set[T]) set[T] {
-	var newSet set[T]
+	newSet := New[T]()
 
 	for key := range s1 {
-		if _, ok := s2[key]; !ok {
+		if !s2.Contains(key) {
 			newSet.Add(key)
 		}
 	}
 
 	for key := range s2 {
-		if _, ok := s1[key]; !ok {
+		if !s1.Contains(key) {
 			newSet.Add(key)
 		}
 	}

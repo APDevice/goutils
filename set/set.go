@@ -44,14 +44,13 @@ func (s set[T]) IsEmpty() bool {
 	return len(s) == 0
 }
 
-
 /* AddAll adds all the elements from another set of type T or other compatible container of T
 
 Input:
  - set[T] or []T
 
  Output:
- - (optional) error: if the container passed in is not supported, an error will be passed indicating the incompatibility
+ - (optional) error: if the container passed in is not supported, an error will be returned indicating the incompatibility
 */
 func (s *set[T]) AddAll(vals interface{}) error {
 	switch vals.(type) {
@@ -69,17 +68,16 @@ func (s *set[T]) AddAll(vals interface{}) error {
 // addFromSlice impliments the AddAll method for other sets
 func (s *set[T]) addFromSet(vals set[T]) {
 	for v := range vals {
-		(*s).Add(v)
+		s.Add(v)
 	}
 }
 
 // addFromSlice impliments the AddAll method for slices
 func (s *set[T]) addFromSlice(vals []T) {
 	for _, v := range vals {
-		(*s).Add(v) 
+		s.Add(v) 
 	}
 }
-
 
 
 // Remove deletes the specified element from set
@@ -92,7 +90,7 @@ func (s *set[T]) Remove(val T) {
 Sample output: set[1 2 3]
  */
 func (s set[T]) String() string {
-	if len(s) == 0 { return "set[]" }
+	if s.IsEmpty() { return "set[]" }
 	var output bytes.Buffer
 	
 	output.WriteString("set[")
